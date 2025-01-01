@@ -1,0 +1,160 @@
+AWSTemplateFormatVersion: '2010-09-09'
+Description: Elastic Beanstalk with CI/CD pipeline using CodePipeline and CodeBuild.
+
+Parameters:
+  KeyPairName:
+    Type: AWS::EC2::KeyPair::KeyName
+    Description: Name of an existing EC2 KeyPair to SSH into the instances.
+    
+  GitHubRepo:
+    Type: String
+    Description: GitHub repository name (e.g., user/repo).
+    
+  GitHubBranch:
+    Type: String
+    Default: main
+    Description: GitHub branch to deploy.
+    
+  GitHubToken:
+    Type: String
+    NoEcho: true
+    Description: GitHub personal access token with repo access.
+
+  MongoURI:
+    Type: String
+    Description: MongoDB Atlas connection string.
+
+  AppURL:
+    Type: String
+    Description: Front-end application URL.
+
+  VpcId:
+    Type: AWS::EC2::VPC::Id
+    Description: VPC ID where the environment will be created
+
+  SubnetId:
+    Type: AWS::EC2::Subnet::Id
+    Description: Subnet ID where the environment will be created
+
+Resources:
+  ElasticBeanstalkServiceRole:
+    Type: AWS::IAM::Role
+    DeletionPolicy: Delete
+    Properties:
+      RoleName: "ebook-server-master-1-eb-service-role"
+      AssumeRolePolicyDocument:
+        Version: '2012-10-17'
+        Statement:
+          - Effect: Allow
+            Principal:
+              Service: elasticbeanstalk.amazonaws.com
+            Action: sts:AssumeRole
+      ManagedPolicyArns:
+        - arn:aws:iam::aws:policy/service-role/AWSElasticBeanstalkService
+        - arn:aws:iam::aws:policy/service-role/AWSElasticBeanstalkEnhancedHealth
+
+  EC2InstanceRole:
+    Type: AWS::IAM::Role
+    DeletionPolicy: Delete
+    Properties:
+      RoleName: "ebook-server-master-1-ec2-role"
+      AssumeRolePolicyDocument:
+        Version: '2012-10-17'
+        Statement:
+          - Effect: Allow
+            Principal:
+              Service: ec2.amazonaws.com
+            Action: sts:AssumeRole
+      ManagedPolicyArns:
+        - arn:aws:iam::aws:policy/AWSElasticBeanstalkWebTier
+
+  EC2InstanceProfile:
+    Type: AWS::IAM::InstanceProfile
+    DeletionPolicy: Delete
+    Properties:
+      InstanceProfileName: "ebook-server-master-1-eb-ec2-profile"
+      Roles:
+        - !Ref EC2InstanceRole
+
+  ElasticBeanstalkApplication:
+    Type: AWS::ElasticBeanstalk::Application
+    DeletionPolicy: Delete
+    Properties:
+      ApplicationName: "ebook-server-master-1"
+      Description: "Elastic Beanstalk Application for MERN Stack Backend"
+
+  ElasticBeanstalkEnvironment:
+    Type: AWS::ElasticBeanstalk::Environment
+    DeletionPolicy: Delete
+    Properties:
+      ApplicationName: !Ref ElasticBeanstalkApplication
+      EnvironmentName: "ebook-server-env"
+      SolutionStackName: "64bit Amazon Linux 2023 v6.4.1 running Node.js 18"
+      Tier:
+        Name: WebServer
+        Type: Standard
+      OptionSettings:
+        - Namespace: aws:ec2:instances
+          OptionName: EnableSpot
+          Value: true
+        
+        - Namespace: aws:ec2:instances
+          OptionName: SpotMaxPrice
+          Value: "0.017"
+        
+        - Namespace: aws:autoscaling:launchconfiguration
+          OptionName: IamInstanceProfile
+          Value: !Ref EC2InstanceProfile
+        
+        - Namespace: aws:ec2:vpc
+          OptionName: VPCId
+          Value: !Ref VpcId
+        
+        - Namespace: aws:ec2:vpc
+          OptionName: Subnets
+          Value: !Ref SubnetId
+        
+        - Namespace: aws:autoscaling:launchconfiguration
+          OptionName: InstanceType
+          Value: t3.micro
+        
+        - Namespace: aws:autoscaling:launchconfiguration
+          OptionName: EC2KeyName
+          Value: !Ref KeyPairName
+        
+        - Namespace: aws:elasticbeanstalk:environment
+          OptionName: ServiceRole
+          Value: !GetAtt ElasticBeanstalkServiceRole.Arn
+        
+        - Namespace: aws:elasticbeanstalk:environment
+          OptionName: EnvironmentType
+          Value: SingleInstance
+        
+        - Namespace: aws:autoscaling:asg
+          OptionName: MinSize
+          Value: "1"
+        
+        - Namespace: aws:autoscaling:asg
+          OptionName: MaxSize
+          Value: "1"
+        
+        - Namespace: aws:elasticbeanstalk:application:environment
+          OptionName: MONGO_URI
+          Value: !Ref MongoURI
+        
+        - Namespace: aws:elasticbeanstalk:application:environment
+          OptionName: APP_URL
+          Value: !Ref AppURL
+        
+        - Namespace: aws:elasticbeanstalk:command
+          OptionName: DeploymentPolicy
+          Value: AllAtOnce
+        
+        - Namespace: aws:elasticbeanstalk:environment:proxy
+          OptionName: ProxyServer
+          Value: nginx
+
+Outputs:
+  EnvironmentURL:
+    Description: URL of the Elastic Beanstalk Environment
+    Value: !GetAtt ElasticBeanstalkEnvironment.EndpointURL
