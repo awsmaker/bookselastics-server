@@ -8,3 +8,4 @@ dist.env
 !.elasticbeanstalk/*.global.yml
 .env
 .env
+elasticbeanstalk-template.yaml
