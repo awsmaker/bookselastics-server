@@ -13,9 +13,9 @@ var __importDefault = (this && this.__importDefault) || function (mod) {
 };
 Object.defineProperty(exports, "__esModule", { value: true });
 exports.getBooks = exports.getAuthorDetails = exports.updateAuthor = exports.registerAuthor = void 0;
-const author_1 = __importDefault(require("@/models/author"));
-const user_1 = __importDefault(require("@/models/user"));
-const helper_1 = require("@/utils/helper");
+const author_1 = __importDefault(require("../models/author"));
+const user_1 = __importDefault(require("../models/user"));
+const helper_1 = require("../utils/helper");
 const slugify_1 = __importDefault(require("slugify"));
 const registerAuthor = (req, res) => __awaiter(void 0, void 0, void 0, function* () {
     const { body, user } = req;

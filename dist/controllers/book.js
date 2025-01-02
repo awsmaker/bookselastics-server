@@ -13,19 +13,19 @@ var __importDefault = (this && this.__importDefault) || function (mod) {
 };
 Object.defineProperty(exports, "__esModule", { value: true });
 exports.deleteBook = exports.getFeaturedBooks = exports.getRecommendedBooks = exports.generateBookAccessUrl = exports.getBookByGenre = exports.getBooksPublicDetails = exports.getAllPurchasedBooks = exports.updateBook = exports.createNewBook = void 0;
-const book_1 = __importDefault(require("@/models/book"));
-const helper_1 = require("@/utils/helper");
+const book_1 = __importDefault(require("../models/book"));
+const helper_1 = require("../utils/helper");
 const client_s3_1 = require("@aws-sdk/client-s3");
 const mongoose_1 = require("mongoose");
 const slugify_1 = __importDefault(require("slugify"));
 const fs_1 = __importDefault(require("fs"));
-const aws_1 = __importDefault(require("@/cloud/aws"));
-const fileUpload_1 = require("@/utils/fileUpload");
-const author_1 = __importDefault(require("@/models/author"));
+const aws_1 = __importDefault(require("../cloud/aws"));
+const fileUpload_1 = require("../utils/fileUpload");
+const author_1 = __importDefault(require("../models/author"));
 const path_1 = __importDefault(require("path"));
-const cludinary_1 = __importDefault(require("@/cloud/cludinary"));
-const user_1 = __importDefault(require("@/models/user"));
-const history_1 = __importDefault(require("@/models/history"));
+const cludinary_1 = __importDefault(require("../cloud/cludinary"));
+const user_1 = __importDefault(require("../models/user"));
+const history_1 = __importDefault(require("../models/history"));
 const s3_request_presigner_1 = require("@aws-sdk/s3-request-presigner");
 const createNewBook = (req, res) => __awaiter(void 0, void 0, void 0, function* () {
     var _a, _b;

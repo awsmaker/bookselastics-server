@@ -13,8 +13,8 @@ var __importDefault = (this && this.__importDefault) || function (mod) {
 };
 Object.defineProperty(exports, "__esModule", { value: true });
 exports.generateFileUploadUrl = exports.uploadBookToAws = exports.uploadBookToLocalDir = exports.uploadCoverToCloudinary = exports.updateAvatarToAws = exports.updateAvatarToCloudinary = void 0;
-const aws_1 = __importDefault(require("@/cloud/aws"));
-const cludinary_1 = __importDefault(require("@/cloud/cludinary"));
+const aws_1 = __importDefault(require("../cloud/aws"));
+const cludinary_1 = __importDefault(require("../cloud/cludinary"));
 const client_s3_1 = require("@aws-sdk/client-s3");
 const fs_1 = __importDefault(require("fs"));
 const path_1 = __importDefault(require("path"));

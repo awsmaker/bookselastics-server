@@ -1,9 +1,9 @@
 "use strict";
 Object.defineProperty(exports, "__esModule", { value: true });
-const book_1 = require("@/controllers/book");
-const auth_1 = require("@/middlewares/auth");
-const file_1 = require("@/middlewares/file");
-const validator_1 = require("@/middlewares/validator");
+const book_1 = require("../controllers/book");
+const auth_1 = require("../middlewares/auth");
+const file_1 = require("../middlewares/file");
+const validator_1 = require("../middlewares/validator");
 const express_1 = require("express");
 const bookRouter = (0, express_1.Router)();
 bookRouter.post("/create", auth_1.isAuth, auth_1.isAuthor, file_1.fileParser, (0, validator_1.validate)(validator_1.newBookSchema), book_1.createNewBook);

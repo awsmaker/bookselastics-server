@@ -1,8 +1,8 @@
 "use strict";
 Object.defineProperty(exports, "__esModule", { value: true });
-const author_1 = require("@/controllers/author");
-const auth_1 = require("@/middlewares/auth");
-const validator_1 = require("@/middlewares/validator");
+const author_1 = require("../controllers/author");
+const auth_1 = require("../middlewares/auth");
+const validator_1 = require("../middlewares/validator");
 const express_1 = require("express");
 const authorRouter = (0, express_1.Router)();
 authorRouter.post("/register", auth_1.isAuth, (0, validator_1.validate)(validator_1.newAuthorSchema), author_1.registerAuthor);

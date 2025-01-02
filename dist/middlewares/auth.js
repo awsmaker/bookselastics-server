@@ -13,9 +13,9 @@ var __importDefault = (this && this.__importDefault) || function (mod) {
 };
 Object.defineProperty(exports, "__esModule", { value: true });
 exports.isValidReadingRequest = exports.isAuthor = exports.isPurchasedByTheUser = exports.isAuth = void 0;
-const book_1 = __importDefault(require("@/models/book"));
-const user_1 = __importDefault(require("@/models/user"));
-const helper_1 = require("@/utils/helper");
+const book_1 = __importDefault(require("../models/book"));
+const user_1 = __importDefault(require("../models/user"));
+const helper_1 = require("../utils/helper");
 const jsonwebtoken_1 = __importDefault(require("jsonwebtoken"));
 const isAuth = (req, res, next) => __awaiter(void 0, void 0, void 0, function* () {
     const authToken = req.cookies.authToken;

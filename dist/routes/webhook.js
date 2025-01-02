@@ -23,7 +23,7 @@ var __importStar = (this && this.__importStar) || function (mod) {
     return result;
 };
 Object.defineProperty(exports, "__esModule", { value: true });
-const payment_1 = require("@/controllers/payment");
+const payment_1 = require("../controllers/payment");
 const express_1 = __importStar(require("express"));
 const webhookRouter = (0, express_1.Router)();
 webhookRouter.post("/", express_1.default.raw({ type: "application/json" }), payment_1.handlePayment);

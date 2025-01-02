@@ -13,9 +13,9 @@ var __importDefault = (this && this.__importDefault) || function (mod) {
 };
 Object.defineProperty(exports, "__esModule", { value: true });
 exports.getPublicReviews = exports.getReview = exports.addReview = void 0;
-const book_1 = __importDefault(require("@/models/book"));
-const review_1 = __importDefault(require("@/models/review"));
-const helper_1 = require("@/utils/helper");
+const book_1 = __importDefault(require("../models/book"));
+const review_1 = __importDefault(require("../models/review"));
+const helper_1 = require("../utils/helper");
 const mongoose_1 = require("mongoose");
 const addReview = (req, res) => __awaiter(void 0, void 0, void 0, function* () {
     const { bookId, rating, content } = req.body;

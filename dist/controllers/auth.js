@@ -14,12 +14,12 @@ var __importDefault = (this && this.__importDefault) || function (mod) {
 Object.defineProperty(exports, "__esModule", { value: true });
 exports.updateProfile = exports.logout = exports.sendProfileInfo = exports.verifyAuthToken = exports.generateAuthLink = void 0;
 const crypto_1 = __importDefault(require("crypto"));
-const verificationToken_1 = __importDefault(require("@/models/verificationToken"));
-const user_1 = __importDefault(require("@/models/user"));
-const mail_1 = __importDefault(require("@/utils/mail"));
-const helper_1 = require("@/utils/helper");
+const verificationToken_1 = __importDefault(require("../models/verificationToken"));
+const user_1 = __importDefault(require("../models/user"));
+const mail_1 = __importDefault(require("../utils/mail"));
+const helper_1 = require("../utils/helper");
 const jsonwebtoken_1 = __importDefault(require("jsonwebtoken"));
-const fileUpload_1 = require("@/utils/fileUpload");
+const fileUpload_1 = require("../utils/fileUpload");
 const slugify_1 = __importDefault(require("slugify"));
 const generateAuthLink = (req, res) => __awaiter(void 0, void 0, void 0, function* () {
     const { email } = req.body;

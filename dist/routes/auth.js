@@ -1,9 +1,9 @@
 "use strict";
 Object.defineProperty(exports, "__esModule", { value: true });
-const auth_1 = require("@/controllers/auth");
-const auth_2 = require("@/middlewares/auth");
-const file_1 = require("@/middlewares/file");
-const validator_1 = require("@/middlewares/validator");
+const auth_1 = require("../controllers/auth");
+const auth_2 = require("../middlewares/auth");
+const file_1 = require("../middlewares/file");
+const validator_1 = require("../middlewares/validator");
 const express_1 = require("express");
 const authRouter = (0, express_1.Router)();
 authRouter.post("/generate-link", (0, validator_1.validate)(validator_1.emailValidationSchema), auth_1.generateAuthLink);

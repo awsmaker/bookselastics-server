@@ -13,11 +13,11 @@ var __importDefault = (this && this.__importDefault) || function (mod) {
 };
 Object.defineProperty(exports, "__esModule", { value: true });
 exports.handlePayment = void 0;
-const cart_1 = __importDefault(require("@/models/cart"));
-const order_1 = __importDefault(require("@/models/order"));
-const user_1 = __importDefault(require("@/models/user"));
-const stripe_local_1 = __importDefault(require("@/stripe-local"));
-const helper_1 = require("@/utils/helper");
+const cart_1 = __importDefault(require("../models/cart"));
+const order_1 = __importDefault(require("../models/order"));
+const user_1 = __importDefault(require("../models/user"));
+const stripe_local_1 = __importDefault(require("../stripe-local"));
+const helper_1 = require("../utils/helper");
 const handlePayment = (req, res) => __awaiter(void 0, void 0, void 0, function* () {
     var _a;
     try {

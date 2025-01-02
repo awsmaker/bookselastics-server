@@ -13,10 +13,10 @@ var __importDefault = (this && this.__importDefault) || function (mod) {
 };
 Object.defineProperty(exports, "__esModule", { value: true });
 exports.getOrderSuccessStatus = exports.getOrderStatus = exports.getOrders = void 0;
-const order_1 = __importDefault(require("@/models/order"));
-const user_1 = __importDefault(require("@/models/user"));
-const stripe_local_1 = __importDefault(require("@/stripe-local"));
-const helper_1 = require("@/utils/helper");
+const order_1 = __importDefault(require("../models/order"));
+const user_1 = __importDefault(require("../models/user"));
+const stripe_local_1 = __importDefault(require("../stripe-local"));
+const helper_1 = require("../utils/helper");
 const mongoose_1 = require("mongoose");
 const getOrders = (req, res) => __awaiter(void 0, void 0, void 0, function* () {
     const orders = yield order_1.default.find({

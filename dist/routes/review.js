@@ -1,8 +1,8 @@
 "use strict";
 Object.defineProperty(exports, "__esModule", { value: true });
-const reivew_1 = require("@/controllers/reivew");
-const auth_1 = require("@/middlewares/auth");
-const validator_1 = require("@/middlewares/validator");
+const reivew_1 = require("../controllers/reivew");
+const auth_1 = require("../middlewares/auth");
+const validator_1 = require("../middlewares/validator");
 const express_1 = require("express");
 const reviewRouter = (0, express_1.Router)();
 reviewRouter.post("/", auth_1.isAuth, (0, validator_1.validate)(validator_1.newReviewSchema), auth_1.isPurchasedByTheUser, reivew_1.addReview);

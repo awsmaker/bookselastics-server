@@ -13,8 +13,8 @@ var __importDefault = (this && this.__importDefault) || function (mod) {
 };
 Object.defineProperty(exports, "__esModule", { value: true });
 exports.searchBooks = void 0;
-const book_1 = __importDefault(require("@/models/book"));
-const helper_1 = require("@/utils/helper");
+const book_1 = __importDefault(require("../models/book"));
+const helper_1 = require("../utils/helper");
 const searchBooks = (req, res) => __awaiter(void 0, void 0, void 0, function* () {
     const { title } = req.query;
     if (typeof title !== "string" || (title === null || title === void 0 ? void 0 : title.trim().length) < 3)

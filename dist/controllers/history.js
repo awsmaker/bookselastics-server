@@ -13,8 +13,8 @@ var __importDefault = (this && this.__importDefault) || function (mod) {
 };
 Object.defineProperty(exports, "__esModule", { value: true });
 exports.getBookHistory = exports.updateBookHistory = void 0;
-const history_1 = __importDefault(require("@/models/history"));
-const helper_1 = require("@/utils/helper");
+const history_1 = __importDefault(require("../models/history"));
+const helper_1 = require("../utils/helper");
 const mongoose_1 = require("mongoose");
 const updateBookHistory = (req, res) => __awaiter(void 0, void 0, void 0, function* () {
     const { bookId, highlights, lastLocation, remove } = req.body;

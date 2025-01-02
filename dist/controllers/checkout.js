@@ -13,11 +13,11 @@ var __importDefault = (this && this.__importDefault) || function (mod) {
 };
 Object.defineProperty(exports, "__esModule", { value: true });
 exports.instantCheckout = exports.checkout = void 0;
-const book_1 = __importDefault(require("@/models/book"));
-const cart_1 = __importDefault(require("@/models/cart"));
-const order_1 = __importDefault(require("@/models/order"));
-const stripe_local_1 = __importDefault(require("@/stripe-local"));
-const helper_1 = require("@/utils/helper");
+const book_1 = __importDefault(require("../models/book"));
+const cart_1 = __importDefault(require("../models/cart"));
+const order_1 = __importDefault(require("../models/order"));
+const stripe_local_1 = __importDefault(require("../stripe-local"));
+const helper_1 = require("../utils/helper");
 const mongoose_1 = require("mongoose");
 const generateStripeCheckoutSession = (options) => __awaiter(void 0, void 0, void 0, function* () {
     const customer = yield stripe_local_1.default.customers.create(options.customer);

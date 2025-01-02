@@ -13,8 +13,8 @@ var __importDefault = (this && this.__importDefault) || function (mod) {
 };
 Object.defineProperty(exports, "__esModule", { value: true });
 exports.clearCart = exports.getCart = exports.updateCart = void 0;
-const cart_1 = __importDefault(require("@/models/cart"));
-const helper_1 = require("@/utils/helper");
+const cart_1 = __importDefault(require("../models/cart"));
+const helper_1 = require("../utils/helper");
 const updateCart = (req, res) => __awaiter(void 0, void 0, void 0, function* () {
     const { items } = req.body;
     let cart = yield cart_1.default.findOne({ userId: req.user.id });
